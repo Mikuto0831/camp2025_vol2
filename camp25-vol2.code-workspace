@@ -1,0 +1,62 @@
+{
+    "folders": [
+        {
+            "name": "backend",
+            "path": "api"
+        },
+        {
+            "name": "frontend",
+            "path": "app"
+        },
+        {
+            "name": "all",
+            "path": "."
+        }
+    ],
+    "settings": {
+        // Go 関連の設定
+        "go.useLanguageServer": true,
+        "go.lintTool": "golangci-lint",
+        "go.formatTool": "goimports",
+        "[go]": {
+            "editor.formatOnSave": true,
+            "editor.codeActionsOnSave": {
+                "source.organizeImports": "explicit"
+            }
+        },
+        // React Native 関連の設定
+        "javascript.updateImportsOnFileMove.enabled": "always",
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "[javascript][javascriptreact][typescript][typescriptreact]": {
+            "editor.formatOnSave": true,
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        // PostgreSQL 関連の設定
+        "sqltools.connections": [
+            {
+                "name": "Development DB",
+                "driver": "PostgreSQL",
+                "server": "localhost",
+                "port": 5432,
+                "database": "devdb",
+                "username": "postgres",
+                "askForPassword": true
+            }
+        ]
+    },
+    "extensions": {
+        "recommendations": [
+            "golang.go",
+            "premparihar.gotestexplorer",
+            "dsznajder.es7-react-js-snippets",
+            "msjsdiag.vscode-react-native",
+            "esbenp.prettier-vscode",
+            "dbaeumer.vscode-eslint",
+            "ckolkman.vscode-postgres",
+            "mtxr.sqltools",
+            "mtxr.sqltools-driver-pg",
+            "eamodio.gitlens",
+            "streetsidesoftware.code-spell-checker"
+        ]
+    }
+}
