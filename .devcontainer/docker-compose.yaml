@@ -1,0 +1,12 @@
+services:
+  api:
+    image: mcr.microsoft.com/devcontainers/go:1-1.23-bookworm
+    volumes:
+      - ..:/workspace
+    working_dir: /workspace
+    command: sleep infinity
+    ports:
+      - "8080:8080"
+    environment:
+      - GO111MODULE=on
+      - GOPROXY=https://proxy.golang.org,direct
