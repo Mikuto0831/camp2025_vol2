@@ -1,0 +1,36 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
+{
+	"name": "backend", // Name of the dev container. This is displayed in the Dev Container menu.
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"dockerComposeFile": "./docker-compose.yaml",
+
+	"service": "api", // Name of the service in the Docker Compose file to use as the container.
+
+	"workspaceFolder": "/workspace", // Path inside the container where the workspace is located.
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "go version",
+
+	"customizations": {
+    // カスタマイズ
+    "vscode": {
+      "extensions": [
+        "taichi.vscode-textlint",  // 文章校正として、textlintの拡張機能
+        "DavidAnson.vscode-markdownlint",  // Markdownの構文とスタイルをチェックの拡張機能
+        "hediet.vscode-drawio",  // 図を記載する際に使うdrawioの拡張機能
+        "bierner.markdown-mermaid"  // mermaidの記載もプレビューできるようにする拡張機能
+      ],
+      "settings": {}
+    }
+  },
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
