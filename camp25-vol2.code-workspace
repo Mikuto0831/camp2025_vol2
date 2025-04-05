@@ -42,7 +42,10 @@
                 "username": "postgres",
                 "askForPassword": true
             }
-        ]
+        ],
+        "[typescriptreact]": {
+            "editor.defaultFormatter": "vscode.typescript-language-features"
+        }
     },
     "extensions": {
         "recommendations": [
