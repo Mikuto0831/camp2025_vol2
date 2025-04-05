@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS hobby_map_genre;
+DROP TABLE IF EXISTS hobby_instance;
+DROP TABLE IF EXISTS genre;
+DROP TABLE IF EXISTS hobby;
+DROP TABLE IF EXISTS "user";
+DROP TABLE IF EXISTS user_type;
+DROP INDEX IF EXISTS idx_hobby_instance_hobby;
+DROP INDEX IF EXISTS idx_hobby_instance_user;
+DROP INDEX IF EXISTS idx_user_uid;
+DROP INDEX IF EXISTS idx_genre_hobby;
