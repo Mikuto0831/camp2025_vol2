@@ -9,11 +9,16 @@ import (
 type (
 	Config struct {
 		App App
+		Log Log
 	}
 
 	App struct {
 		Name    string `env:"APP_NAME,required"`
 		Version string `env:"APP_VERSION,required"`
+	}
+
+	Log struct {
+		LogLevel string `env:"LOG_LEVEL,required"`
 	}
 )
 

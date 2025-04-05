@@ -2,18 +2,23 @@ package app
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	firebase "firebase.google.com/go"
 
 	"github.com/mikuto0831/camp2025_vol2/config"
+	"github.com/mikuto0831/camp2025_vol2/pkg/logger"
 	"google.golang.org/api/option"
 )
 
 // run
 func Run(cfg *config.Config) {
-	fmt.Println("App Name:", cfg.App.Name)
+	l := logger.New(cfg.Log.LogLevel)
+
+	l.Info("App Name: %s", cfg.App.Name)
+
+	// Repositroy
+	
 
 	// Initialize Firebase
 	opt := option.WithCredentialsFile("firebase-adminsdk.json")
@@ -21,6 +26,6 @@ func Run(cfg *config.Config) {
 	if err != nil {
 		log.Fatalf("error initializing app: %v", err)
 	} else {
-		fmt.Println("successfully initialized firebase app")
+		l.Info("successfully initialized firebase app")
 	}
 }
