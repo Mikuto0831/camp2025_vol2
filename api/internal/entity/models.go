@@ -2,7 +2,8 @@
 // versions:
 //   sqlc v1.28.0
 
-package db
+package entity
+// source: models.sql
 
 import (
 	"github.com/jackc/pgx/v5/pgtype"

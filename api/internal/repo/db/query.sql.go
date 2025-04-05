@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/jackc/pgx/v5/pgtype"
+	"github.com/mikuto0831/camp2025_vol2/internal/entity"
 )
 
 const getUser = `-- name: GetUser :one
@@ -17,9 +18,9 @@ WHERE uid = $1
   AND deleted = false
 `
 
-func (q *Queries) GetUser(ctx context.Context, uid pgtype.UUID) (User, error) {
+func (q *Queries) GetUser(ctx context.Context, uid pgtype.UUID) (entity.User, error) {
 	row := q.db.QueryRow(ctx, getUser, uid)
-	var i User
+	var i entity.User
 	err := row.Scan(
 		&i.ID,
 		&i.Uid,
