@@ -3,7 +3,6 @@
 //   sqlc v1.28.0
 
 package entity
-// source: models.sql
 
 import (
 	"github.com/jackc/pgx/v5/pgtype"
@@ -39,17 +38,17 @@ type HobbyMapGenre struct {
 }
 
 type User struct {
-	ID       pgtype.UUID      `json:"id"`
-	Uid      pgtype.UUID      `json:"uid"`
-	UserType pgtype.Text      `json:"user_type"`
-	Name     string           `json:"name"`
-	Email    string           `json:"email"`
-	Birth    pgtype.Date      `json:"birth"`
-	Sex      int32            `json:"sex"`
-	CreateAt pgtype.Timestamp `json:"create_at"`
-	UpdateAt pgtype.Timestamp `json:"update_at"`
-	DeleteAt pgtype.Timestamp `json:"delete_at"`
-	Deleted  pgtype.Bool      `json:"deleted"`
+	ID         pgtype.UUID      `json:"id"`
+	Uid        string           `json:"uid"`
+	UserTypeID pgtype.UUID      `json:"user_type_id"`
+	Name       string           `json:"name"`
+	Email      string           `json:"email"`
+	Birth      pgtype.Date      `json:"birth"`
+	Sex        int32            `json:"sex"`
+	CreateAt   pgtype.Timestamp `json:"create_at"`
+	UpdateAt   pgtype.Timestamp `json:"update_at"`
+	DeleteAt   pgtype.Timestamp `json:"delete_at"`
+	Deleted    pgtype.Bool      `json:"deleted"`
 }
 
 type UserType struct {

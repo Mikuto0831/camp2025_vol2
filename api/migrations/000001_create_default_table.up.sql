@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS user_type (
 );
 
 -- ユーザー
-CREATE TABLE IF NOT EXISTS "user" (
-    id UUID PRIMARY KEY,
-    uid UUID NOT NULL, -- Firebase UID
-    user_type VARCHAR(16) REFERENCES user_type(id) ON DELETE SET NULL,
+CREATE TABLE IF NOT EXISTS users (
+    id UUID DEFAULT gen_random_uuid () PRIMARY KEY,
+    uid VARCHAR(32) NOT NULL, -- Firebase UID
+    user_type_id UUID REFERENCES user_type(id) ON DELETE SET NULL,
     name VARCHAR(32) NOT NULL,
     email VARCHAR(128) NOT NULL,
     birth DATE NOT NULL,
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS genre (
 
 -- 趣味の個別インスタンス（例：好きな楽曲、読んだ本など）
 CREATE TABLE IF NOT EXISTS hobby_instance (
-    id UUID PRIMARY KEY,
-    user_id UUID REFERENCES "user"(id) ON DELETE CASCADE,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     hobby_id INTEGER REFERENCES hobby(id) ON DELETE CASCADE,
     title VARCHAR(128) NOT NULL,
     created_by VARCHAR(128) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS hobby_map_genre (
     genre_id INTEGER REFERENCES genre(id) ON DELETE CASCADE
 );
 
-CREATE INDEX idx_user_uid ON "user"(uid);
+CREATE INDEX idx_user_uid ON users(uid);
 CREATE INDEX idx_hobby_instance_user ON hobby_instance(user_id);
 CREATE INDEX idx_hobby_instance_hobby ON hobby_instance(hobby_id);
 CREATE INDEX idx_genre_hobby ON genre(hobby);
@@ -68,7 +68,7 @@ INSERT INTO user_type (id, type) VALUES
     ('c31b7734-6581-4457-b05b-6715b21f590c', 'general'),
     ('380de38b-6531-490a-822c-ff74fed8771f', 'admin');
 
-INSERT INTO "user" (uid, user_type, name, email, birth, sex) VALUES
-    ('pLCe1daykgdyUli0JKG0vECOGUy2', 'domain', 'mikuto', 'mikuto1227k@gmail.com', '2004-09-23', 1);
+INSERT INTO users (uid, user_type_id, name, email, birth, sex) VALUES
+    ('pLCe1daykgdyUli0JKG0vECOGUy2', '9ee2e99f-944f-4278-b1d7-ef5c5475cd76', 'mikuto', 'mikuto1227k@gmail.com', '2004-09-23', 1);
 
 COMMIT;

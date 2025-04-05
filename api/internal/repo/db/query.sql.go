@@ -8,23 +8,22 @@ package db
 import (
 	"context"
 
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/mikuto0831/camp2025_vol2/internal/entity"
 )
 
-const getUser = `-- name: GetUser :one
-SELECT id, uid, user_type, name, email, birth, sex, create_at, update_at, delete_at, deleted FROM "user"
-WHERE uid = $1 
+const getUserByUid = `-- name: GetUser :one
+SELECT id, uid, user_type_id, name, email, birth, sex, create_at, update_at, delete_at, deleted FROM users
+WHERE uid = $1
   AND deleted = false
 `
 
-func (q *Queries) GetUser(ctx context.Context, uid pgtype.UUID) (entity.User, error) {
-	row := q.db.QueryRow(ctx, getUser, uid)
+func (q *Queries) GetUserByUid(ctx context.Context, uid string) (entity.User, error) {
+	row := q.db.QueryRow(ctx, getUserByUid, uid)
 	var i entity.User
 	err := row.Scan(
 		&i.ID,
 		&i.Uid,
-		&i.UserType,
+		&i.UserTypeID,
 		&i.Name,
 		&i.Email,
 		&i.Birth,

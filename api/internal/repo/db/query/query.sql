@@ -1,4 +1,4 @@
--- name: GetUser :one
-SELECT * FROM "user"
-WHERE uid = $1 
+-- name: GetUserByUid :one
+SELECT * FROM users
+WHERE uid = $1
   AND deleted = false;
