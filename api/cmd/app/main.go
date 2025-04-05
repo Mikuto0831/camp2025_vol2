@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/mikuto0831/camp2025_vol2/internal/app"
@@ -8,10 +9,12 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	cfg, err := config.NewConfig()
 	if err != nil {
 		log.Fatalf("Config error: %s",err)
 	}
 
-	app.Run(cfg)
+	app.Run(ctx, cfg)
 }
