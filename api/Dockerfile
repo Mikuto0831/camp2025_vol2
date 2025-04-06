@@ -19,7 +19,8 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -tags migrate -o /bin/app ./cmd/app
 
 # Step 3: Final
-FROM scratch
+FROM alpine:3.21
+RUN apk add curl
 
 COPY --from=builder /app/config /config
 COPY --from=builder /app/migrations /migrations

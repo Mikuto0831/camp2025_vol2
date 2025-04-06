@@ -40,7 +40,7 @@ func (r *Router) SetupRoutes() {
     // 認証関連ルート
     auth := r.e.Group("/auth")
     {
-        auth.POST("/login", r.authController.VerifyIDToken)
+        auth.POST("/verify", r.authController.VerifyIDToken)
     }
 
     r.e.GET("/", helloweb)

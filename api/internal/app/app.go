@@ -63,7 +63,7 @@ func Run(ctx context.Context, cfg *config.Config) {
     r.SetupRoutes()
 
     // サーバー起動
-    serverAddr := fmt.Sprintf(":%d", cfg.App.Port) // ポート設定を追加
+    serverAddr := fmt.Sprintf("0.0.0.0:%d", cfg.App.Port) // ポート設定を追加
     l.Info("Starting server at %s", serverAddr)
     if err := r.Start(serverAddr); err != nil {
         l.Fatal("Server error: %v", err)
