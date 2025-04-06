@@ -7,6 +7,32 @@ import "./App.css";
 function App() {
   const [geoData, setGeoData] = useState(null);
 
+  //選択された都道府県名
+  const [selectedPref, setSelectPref] = useState(null);
+  const [ranking, setRanking] = useState([]);
+
+  // 任意の都道府県名を受け取って、5件のランダムランキングを返す
+  const getMockRanking = () => {
+    const musicData = [
+      { artist: "YOASOBI", song: "夜に駆ける", cover: "cover1.jpg" },
+      { artist: "米津玄師", song: "Lemon", cover: "cover2.jpg" },
+      { artist: "Aimer", song: "残響散歌", cover: "cover3.jpg" },
+      { artist: "Official髭男dism", song: "Pretender", cover: "cover4.jpg" },
+      { artist: "King Gnu", song: "白日", cover: "cover5.jpg" },
+      { artist: "Mrs. GREEN APPLE", song: "ダンスホール", cover: "cover6.jpg" },
+    ];
+
+    //配列をシャッフル
+    const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
+
+    //セットをシャッフルして5件選び、ランク付け
+    return shuffle(musicData).slice(0, 5).map((item, index) => ({
+      rank: index + 1,
+      ...item,
+    }));
+
+  }
+
   useEffect(() => {
     // GeoJSONデータを取得
     fetch("/N03-21_210101.json") // GeoJSONファイルのパスを指定
@@ -52,8 +78,37 @@ function App() {
 
   return (
     <div>
-      <h1>日本地図</h1>
-      <div id="map" style={{ height: "500px", width: "100%" }}></div>
+    {selectedPref && (
+    <div style={{ marginTop: '1rem', textAlign: 'center' }}>
+      <h2>{selectedPref} の音楽ランキング</h2>
+      <ul style={{ marginTop: '1rem', textAlign: 'center' }}>
+        {ranking.map((item) => (
+          <li
+            key={item.rank}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '1rem 0',
+            }}
+            >
+            <span style={{ marginRight: '1rem' }}>{item.rank}位</span>
+            <img
+              src={item.cover}
+              alt="cover"
+              style={{ width: 50, height: 50, marginRight: '1rem' }}
+            />
+            <div>
+              <div>{item.song}</div>
+              <div style={{ fontSize: '0.8rem', color: '#555' }}>
+                  {item.artist}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+    )}
     </div>
   );
 }
