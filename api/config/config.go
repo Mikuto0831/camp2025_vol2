@@ -15,6 +15,7 @@ type (
 	App struct {
 		Name    string `env:"APP_NAME,required"`
 		Version string `env:"APP_VERSION,required"`
+		Port    int `env:"APP_PORT,required"`
 	}
 
 	Log struct {
