@@ -25,7 +25,7 @@ func Run(ctx context.Context, cfg *config.Config) {
 	l.Info("App Name: %s", cfg.App.Name)
 
 	// Repositroy
-	conn, err := pgx.Connect(ctx, "postgres://user:password@localhost:5432/gis")
+	conn, err := pgx.Connect(ctx, "postgres://user:password@postgis:5432/gis")
 	if err != nil {
 		l.Fatal("Unable to connect to database: %v\n", err)
 	}
@@ -51,8 +51,8 @@ func Run(ctx context.Context, cfg *config.Config) {
 
 	// コントローラーの作成
     authController := controller.NewAuthController(
-        authUseCase, 
-        presenter.NewAuthPresenter(), 
+        authUseCase,
+        presenter.NewAuthPresenter(),
         presenter.NewErrorPresenter(),
     )
 
