@@ -1,32 +1,81 @@
-import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { Link, router } from 'expo-router';
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
+import { useState } from 'react';
+
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config"
+
+const handlePress = (email: string, password: string): void => {
+    //会員登録
+    console.log(email, password)
+    createUserWithEmailAndPassword(auth, email, password)
+        .then(
+            (userCredential) => {
+                console.log(userCredential.user.uid)
+                router.replace('/map/map')
+            }
+        )
+        .catch(
+            (error) => {
+                const { code, message } = error
+                Alert.alert(code, message)
+                console.log(code, message)
+            }
+        )
+
+
+}
 
 const SingUp = (): JSX.Element => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     return (
         <View style={styles.container}>
 
             <View style={styles.inner}>
-                <Text style={styles.title}>にログイン</Text>
+                <Text style={styles.title}>GisGuesserに新規登録</Text>
 
                 <Text style={styles.inputText}>メールアドレス</Text>
-                <TextInput style={styles.input} />
+                <TextInput
+                    style={styles.input}
+                    value={email}
+                    placeholder="Email"
+                    autoCapitalize='none'
+                    keyboardType="email-address"
+                    textContentType='emailAddress'
+                    onChangeText={(text) => setEmail(text)}
+                />
 
                 <Text style={styles.inputText}>パスワード</Text>
-                <TextInput style={styles.input} />
+                <TextInput
+                    style={styles.input}
+                    value={password}
+                    autoCapitalize="none"
+                    secureTextEntry
+                    placeholder="Password"
+                    textContentType="password"
+                    onChangeText={(text) => setPassword(text)}
+                />
 
                 <View style={styles.footer}>
-                    <Text style={styles.footerText}>アカウントを持っていませんか？</Text>
+                    <Text style={styles.footerText}>アカウントをお持ちですか？</Text>
 
-                    <TouchableOpacity>
-                        <Text style={styles.footerLink}>新規登録</Text>
-                    </TouchableOpacity>
+                    <Link href="/Auth/sign_in" asChild>
+                        <TouchableOpacity>
+                            <Text style={styles.footerLink}>ログイン</Text>
+                        </TouchableOpacity>
+                    </Link>
                 </View>
 
-                <TouchableOpacity>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonLabel}>ログイン</Text>
-                    </View>
-                </TouchableOpacity>
+                <Link href="/map/map" asChild>
+                    <TouchableOpacity onPress={() => handlePress(email, password)}>
+                        <View style={styles.button}>
+                            <Text style={styles.buttonLabel}>新規登録</Text>
+                        </View>
+                    </TouchableOpacity>
+                </Link>
 
             </View>
 

@@ -1,23 +1,28 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Link } from 'expo-router';
 
 const Top = (): JSX.Element => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.logo}>
-                <Text>logo</Text>
-            </View>
 
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>はじめる</Text>
-            </TouchableOpacity>
+            <Image style={styles.logoImage} source={require('../../assets/images/GisGuesser.png')} />
+
+            <Link href="/Auth/sign_up" asChild>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>はじめる</Text>
+                </TouchableOpacity>
+            </Link>
 
             <View style={styles.footer}>
                 <Text style={styles.footerText}>アカウントをお持ちですか？</Text>
-                <TouchableOpacity>
-                    <Text style={styles.footerLink}>ログイン</Text>
-                </TouchableOpacity>
+
+                <Link href="/Auth/sign_in" asChild>
+                    <TouchableOpacity>
+                        <Text style={styles.footerLink}>ログイン</Text>
+                    </TouchableOpacity>
+                </Link>
+
             </View>
         </View>
     )
@@ -32,14 +37,21 @@ const styles = StyleSheet.create({
     },
 
     logo: {
-        backgroundColor: '#FFAA00',
+        // backgroundColor: '#FFAA00',
+
+        // paddingVertical: 100,
+        // paddingHorizontal: 100,
+        // borderRadius: 18
+
+    },
+
+    logoImage: {
         alignSelf: 'center',
         flexDirection: 'row',
         justifyContent: 'center',
-        paddingVertical: 130,
-        paddingHorizontal: 130,
-        borderRadius: 18
-
+        width: 350,
+        height: 350,
+        borderRadius: 18,
     },
 
     button: {
